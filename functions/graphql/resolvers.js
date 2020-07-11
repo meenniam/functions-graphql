@@ -32,7 +32,8 @@ const resolverFunctions = {
   Mutation: {
     createUser: async (parent, args) => {
       try {
-        await db.collection("Users").add(args);
+        const {input} = JSON.parse(JSON.stringify(args));
+        await db.collection("Users").add(input);
         return 'success'
       } catch (error) {
         return error;
